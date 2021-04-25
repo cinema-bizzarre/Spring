@@ -37,15 +37,15 @@ public class Products {
     public void setPrice(int price) {
         this.price = price;
     }
-
-
-    public Products() {
-    }
-
+   
     public Products(String title, int price) {
         this.title = title;
         this.price = price;
     }
+
+    public Products() {
+    }
+
     @Override
     public String toString(){
         return String.format("Item [id = %d, title = '%s', price = %d]", id, title, price);
