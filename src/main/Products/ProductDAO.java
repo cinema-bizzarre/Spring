@@ -52,7 +52,7 @@ public class ProductDAO {
         Products productsFromDb = session.get(Products.class, 1L);
         System.out.println(productsFromDb);
         productsFromDb.setPrice(4800);
-        productsFromDb.setTitle("sundress");
+        productsFromDb.setTitle("overall");
         session.getTransaction().commit();
     }
     public void deleteProducts(){
