@@ -1,3 +1,4 @@
+package module;
 import javax.persistence.*;
 
 @Entity
@@ -37,7 +38,7 @@ public class Products {
     public void setPrice(int price) {
         this.price = price;
     }
-   
+
     public Products(String title, int price) {
         this.title = title;
         this.price = price;

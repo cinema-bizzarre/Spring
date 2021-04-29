@@ -1,23 +1,24 @@
+package repository;
+
+import config.DatabaseConfiguration;
+import module.Products;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class ProductDAO {
-        private SessionFactory sessionFactory;
-        private Session session;
 
-    public  void config (){
-        SessionFactory sessionFactory = new Configuration()
-                .addAnnotatedClass(Products.class)
-                .buildSessionFactory();
+    private DatabaseConfiguration databaseConfiguration;
+    private Session session;
 
-        Session session = null;
-
+    @Autowired
+    public void productsRepository (DatabaseConfiguration databaseConfiguration) {
+        this.databaseConfiguration = databaseConfiguration;
     }
+
     public void createProducts (){
-        session = sessionFactory.getCurrentSession();
+        session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products products = new Products("sundress", 4500);
         System.out.println(products);
@@ -27,7 +28,7 @@ public class ProductDAO {
     }
 
     public void readProducts(){
-       session = sessionFactory.getCurrentSession();
+       session = databaseConfiguration.getCurrentSession();
        session.beginTransaction();
        Products productsFromDb = session.get(Products.class, 1L);
        System.out.println(productsFromDb);
@@ -35,7 +36,7 @@ public class ProductDAO {
     }
 
     public void showProducts(){
-        session = sessionFactory.getCurrentSession();
+        session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.createQuery("SELECT i FROM Products i WHERE i.id = :id", Products.class)
                 .setParameter("id", 4L)
@@ -47,7 +48,7 @@ public class ProductDAO {
     }
 
     public void updateProducts(){
-        session = sessionFactory.getCurrentSession();
+        session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.get(Products.class, 1L);
         System.out.println(productsFromDb);
@@ -56,7 +57,7 @@ public class ProductDAO {
         session.getTransaction().commit();
     }
     public void deleteProducts(){
-        session = sessionFactory.getCurrentSession();
+        session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.get(Products.class, 1L);
         session.remove(productsFromDb);
