@@ -12,15 +12,19 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "FIO")
+    private String FIO;
 
-    @Column(name = "LastName")
-    private String lastName;
+    @Column(name = "login")
+    private String login;
 
-    @JoinColumn(name = "roleId")
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     @ManyToOne(fetch = FetchType.EAGER) //данные тянутся в момент запроса к БД
-    private Role role;
 
     @ManyToMany(fetch = FetchType.LAZY) //данные тянутся в момент первого обращения к полю
     @JoinTable(
@@ -38,14 +42,6 @@ public class User {
         this.products = products;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public int getId() {
         return id;
     }
@@ -54,19 +50,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFIO() {
+        return FIO;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFIO(String FIO) {this.FIO = FIO;}
+
+    public String getLogin() {
+        return login;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getEmail() {return email; }
+
+    public void setEmail(String email) {this.email = email;}
+
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;}
 }

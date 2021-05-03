@@ -35,7 +35,7 @@ public class ProductDAO {
        session.getTransaction().commit();
     }
 
-    public void showProducts(){
+    public List<Products> showId(Long id){
         session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.createQuery("SELECT i FROM Products i WHERE i.id = :id", Products.class)
@@ -45,9 +45,10 @@ public class ProductDAO {
         List<Products> products = session.createQuery("SELECT i FROM Products i", Products.class).getResultList();
         System.out.println(products);
         session.getTransaction().commit();
+        return products;
     }
 
-    public void updateProducts(){
+    public void saveOrUpdate(Products products){
         session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.get(Products.class, 1L);
@@ -56,7 +57,7 @@ public class ProductDAO {
         productsFromDb.setTitle("overall");
         session.getTransaction().commit();
     }
-    public void deleteProducts(){
+    public void deleteID(Long Id){
         session = databaseConfiguration.getCurrentSession();
         session.beginTransaction();
         Products productsFromDb = session.get(Products.class, 1L);
